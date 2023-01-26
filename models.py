@@ -18,4 +18,20 @@ class Card:
 
 
 class Deck:
-    pass
+    def __init__(self):
+        self.cards = []
+        for suit in Suits:
+            for value in range(1, 14):
+                self.cards.append(Card(suit, value))
+
+    def shuffle(self):
+        random.shuffle(self.cards)
+
+    def deal(self):
+        return self.cards.pop()
+
+    def __len__(self):
+        return len(self.cards)
+
+
+
