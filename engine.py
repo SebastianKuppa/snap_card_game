@@ -16,6 +16,13 @@ class GameEngine:
         self.player1 = Player(name='Player1', flipKey=pygame.K_q, snapKey=pygame.K_w)
         self.player2 = Player(name='Player2', flipKey=pygame.K_o, snapKey=pygame.K_p)
         self.pile = Pile()
-        self.deck.deal()
+        self.deal()
         self.current_player = self.player1
         self.state = GameState.PLAYING
+
+    def deal(self):
+        half = self.deck.cards.length() // 2
+        for i in range(0, half):
+            self.player1.draw(self.deck)
+            self.player2.draw(self.deck)
+
