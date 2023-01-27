@@ -58,3 +58,16 @@ class Pile:
             return self.cards[-1].value == self.cards[-2].value
         return False
 
+
+class Player:
+    def __init__(self, flipKey, snapKey, name):
+        self.hand = []
+        self.flipKey = flipKey
+        self.snapKey = snapKey
+        self.name = name
+
+    def draw(self, deck):
+        self.hand.append(deck.deal())
+
+    def play(self):
+        return self.hand.pop(0)
