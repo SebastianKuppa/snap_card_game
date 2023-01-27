@@ -31,3 +31,8 @@ class GameEngine:
             self.current_player = self.player2
         else:
             self.current_player = self.player1
+
+    def winRound(self, player):
+        self.state = GameState.SNAPPING
+        player.hand.extend(self.pile.popAll())
+        self.pile.clear()
