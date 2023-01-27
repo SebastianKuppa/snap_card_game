@@ -26,3 +26,8 @@ class GameEngine:
             self.player1.draw(self.deck)
             self.player2.draw(self.deck)
 
+    def switchPlayer(self):
+        if self.current_player == self.player1:
+            self.current_player = self.player2
+        else:
+            self.current_player = self.player1
