@@ -36,3 +36,10 @@ class GameEngine:
         self.state = GameState.SNAPPING
         player.hand.extend(self.pile.popAll())
         self.pile.clear()
+
+    def play(self, key):
+        if key is None:
+            return
+
+        if key is GameState.ENDED:
+            return
