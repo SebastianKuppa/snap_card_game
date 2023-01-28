@@ -10,6 +10,8 @@ class GameState(Enum):
 
 
 class GameEngine:
+    result = {}
+
     def __init__(self):
         self.deck = Deck()
         self.deck.shuffle()
@@ -41,5 +43,36 @@ class GameEngine:
         if key is None:
             return
 
-        if key is GameState.ENDED:
+        if self.state == GameState.ENDED:
             return
+
+        if key == self.current_player.flipKey:
+            self.pile.add(self.current_player.play())
+            self.switchPlayer()
+
+        snapCaller = None
+        nonSnapCaller = None
+        isSnap = self.pile.isSnap()
+
+        if key == self.player1.snapKey:
+            snapCaller = self.player1
+            nonSnapCaller = self.player2
+        elif key == self.player2.snapKey:
+            snapCaller = self.player2
+            nonSnapCaller = self.player1
+
+        if isSnap and snapCaller:
+            self.result = {
+                "winner": snapCaller,
+                "isSnap": True,
+                "snapCaller": snapCaller
+            }
+            self.winRound(snapCaller)
+
+        elif not isSnap and snapCaller:
+            self.result = {
+                "winner": nonSnapCaller,
+                "isSnap": False,
+                "snapCaller": snapCaller
+            }
+            self.winRound(nonSnapCaller)
