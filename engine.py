@@ -23,7 +23,7 @@ class GameEngine:
         self.state = GameState.PLAYING
 
     def deal(self):
-        half = self.deck.cards.length() // 2
+        half = len(self.deck.cards) // 2
         for i in range(0, half):
             self.player1.draw(self.deck)
             self.player2.draw(self.deck)

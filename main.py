@@ -31,6 +31,25 @@ def renderGame(window):
     if top_card is not None:
         window.blit(top_card.image, (400, 200))
 
+    if gameEngine.state == GameState.PLAYING:
+        text = font.render(gameEngine.current_player.name + ' to flip', True, (255, 255, 255))
+        window.blit(text, (20, 50))
+
+    if gameEngine.state == GameState.SNAPPING:
+        result = gameEngine.result
+        if result['isSnap'] is True:
+            message = "Winning Snap! by " + result['winner'].name
+        else:
+            message = "False Snap! by " + result['snapCaller'].name + '. ' + result['winner'].name + ' wins!'
+        text = font.render(message, True, (255, 255, 255))
+        window.blit(text, (20, 50))
+
+    if gameEngine.state == GameState.ENDED:
+        result = gameEngine.result
+        message = "Game Over! " + result["winner"].name + " wins the game."
+        text = font.render(message, True, (255, 255, 255))
+        window.blit(text, (20, 50))
+
 
 if __name__ == '__main__':
     gameEngine = engine.GameEngine()
